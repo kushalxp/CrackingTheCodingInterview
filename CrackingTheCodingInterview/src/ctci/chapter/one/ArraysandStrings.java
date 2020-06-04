@@ -4,7 +4,10 @@ import java.util.HashSet;
 
 public class ArraysandStrings {
 
-	// 1.1
+	/*
+	 * 1.1 Is Unique: Implement an algorithm to determine if a string has all unique
+	 * characters. What if you cannot use additional data structures?
+	 */
 	public boolean isUniqueCharString(String s) {
 		boolean[] chars = new boolean[26];
 		for (int i = 0; i < s.length(); i++) {
@@ -19,26 +22,28 @@ public class ArraysandStrings {
 		return true;
 	}
 
-	// 1.2
-	public boolean checkPermutation(String str1, String str2) {
-		HashSet<Character> hashSet = new HashSet<Character>();
+	/*
+	 * 1.2 Check Permutation: Given two strings, write a method to decide if one is
+	 * a permutation of the other.
+	 */
+	public boolean checkPermutation(String s, String t) {
 
-		if (str1.length() == str2.length()) {
-			// Dumping str1 to Hash set
-			for (int i = 0; i < str1.length(); i++) {
-				hashSet.add(str1.charAt(i));
-			}
-
-			// Checking if str2 is same as str1
-			for (int i = 0; i < str2.length(); i++) {
-				if (!hashSet.contains(str2.charAt(i))) {
-					return false;
-				}
-			}
-		} else {
+		if (s.length() != t.length()) {
 			return false;
 		}
 
+		byte[] characterCount = new byte[26];
+
+		for (int i = 0; i < s.length(); i++) {
+			characterCount[s.charAt(i) - 'a']++;
+			characterCount[t.charAt(i) - 'a']--;
+		}
+
+		for (int i = 0; i < characterCount.length; i++) {
+			if (characterCount[i] != 0) {
+				return false;
+			}
+		}
 		return true;
 
 	}
@@ -46,8 +51,8 @@ public class ArraysandStrings {
 	public static void main(String[] args) {
 
 		ArraysandStrings obj = new ArraysandStrings();
-		String stringOne = "abc";
-		String stringTwo = "cab";
+		String stringOne = "aab";
+		String stringTwo = "abb";
 		System.out.println(obj.checkPermutation(stringOne, stringTwo));
 	}
 
