@@ -80,20 +80,73 @@ public class ArraysandStrings {
 		}
 	}
 
+	/*
+	 * 1.4 Palindrome Permutation: Given a string, write a function to check if it
+	 * is a permutation of a palindrome. A palindrome is a word or phrase that is
+	 * the same forwards and backwards. A permutation is a rea rrangement of
+	 * letters. The palindrome does not need to be limited to just dictionary words.
+	 * EXAMPLE Input: Tact Coa Output: True (permutations: "taco cat". "atco cta".
+	 * etc.)
+	 */
+	public boolean palindromePermutation(String s) {
+
+		if (s == null || s.length() == 0) {
+			return false;
+		}
+
+		byte[] characters = new byte[26];
+		String alphabets = s.replaceAll("[^a-zA-Z]", "").toLowerCase();
+
+		for (int i = 0; i < alphabets.length(); i++) {
+			characters[alphabets.charAt(i) - 'a']++;
+		}
+
+		boolean isEven = true;
+		if (alphabets.length() % 2 != 0) {
+			isEven = false;
+		}
+		int count = 0;
+		for (int i = 0; i < characters.length; i++) {
+			if (isEven) {
+				if (characters[i] == 0 || characters[i] % 2 == 0) {
+				} else {
+					return false;
+				}
+			} else {
+				if (characters[i] % 2 != 0) {
+					count++;
+				} else if (count > 1) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
 	public static void main(String[] args) {
 
 		ArraysandStrings obj = new ArraysandStrings();
-		/*
-		 * 1.2 String stringOne = "aab"; String stringTwo = "abb";
-		 * System.out.println(obj.checkPermutation(stringOne, stringTwo));
-		 */
+
+//		1.1
+//		String str = "kushal";
+//		System.out.println(obj.isUniqueCharString(str));
 		
-		String str = "Mr john smith    ";
-		System.out.println("The given string is: " + str);
-		char[] arr = str.toCharArray();
-		obj.URLify(arr, 13);
-		String string = String.valueOf(arr);
-		System.out.print("The urlified string is: "+ string);
+//		1.2
+//		  String stringOne = "aab"; 
+//		  String stringTwo = "abb";
+//		  System.out.println(obj.checkPermutation(stringOne, stringTwo));
+		 
+//		1.3
+//		String str = "Mr john smith    ";
+//		System.out.println("The given string is: " + str);
+//		char[] arr = str.toCharArray();
+//		obj.URLify(arr, 13);
+//		String string = String.valueOf(arr);
+//		System.out.print("The urlified string is: " + string);
+		
+//		1.4
+		String s = "Leevl";
+		System.out.println(obj.palindromePermutation(s));
 	}
 
 }
