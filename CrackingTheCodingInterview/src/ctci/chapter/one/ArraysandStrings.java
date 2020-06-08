@@ -85,9 +85,10 @@ public class ArraysandStrings {
 	 * is a permutation of a palindrome. A palindrome is a word or phrase that is
 	 * the same forwards and backwards. A permutation is a rea rrangement of
 	 * letters. The palindrome does not need to be limited to just dictionary words.
-	 * EXAMPLE Input: Tact Coa Output: True (permutations: "taco cat". "atco cta".
-	 * etc.)
+	 * EXAMPLE 
 	 */
+//	Input: Tact Coa 
+//	Output: True (permutations: "taco cat". "atco cta".* etc.)
 	public boolean palindromePermutation(String s) {
 
 		if (s == null || s.length() == 0) {
@@ -123,6 +124,45 @@ public class ArraysandStrings {
 		return true;
 	}
 
+	/*
+	 * 1.5 One Away: There are three types of edits that can be performed on
+	 * strings: insert a character, remove a character, or replace a character.
+	 * Given two strings, write a function to check if they are one edit (or zero
+	 * edits) away. EXAMPLE
+	 */
+//		pale, pIe -> true
+//		pales. pale -> true
+//		pale. bale -> true
+//		pale. bake -> false
+
+	public boolean oneAway(String one, String two) {
+
+		if(one.length() - two.length() == 0 || Math.abs(one.length() - two.length()) == 1) {
+		 
+		 byte[] chars = new byte[26];
+		 int editAway = 0;
+			
+			for (int i =0; i< one.length(); i++) {
+				chars[one.charAt(i) - 'a']++;
+			}
+			
+			for (int i =0; i< two.length(); i++) {
+				chars[two.charAt(i) - 'a']--;
+			}
+			
+			for (int i =0; i<chars.length;i++) {
+				if(chars[i] == 1 || chars[i] == -1) {
+				editAway++;
+				}	
+			}
+			
+			if(editAway <= 1) {
+			return true;
+			}
+		 }
+		return false;
+	}
+	
 	public static void main(String[] args) {
 
 		ArraysandStrings obj = new ArraysandStrings();
@@ -145,8 +185,13 @@ public class ArraysandStrings {
 //		System.out.print("The urlified string is: " + string);
 		
 //		1.4
-		String s = "Leevl";
-		System.out.println(obj.palindromePermutation(s));
+//		String s = "Leevl";
+//		System.out.println(obj.palindromePermutation(s));
+		
+//		1.5
+		String stringOne = "pales"; 
+		String stringTwo = "bakes";
+		System.out.println(obj.oneAway(stringOne, stringTwo));
 	}
 
 }
