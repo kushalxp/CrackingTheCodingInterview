@@ -85,7 +85,7 @@ public class ArraysandStrings {
 	 * is a permutation of a palindrome. A palindrome is a word or phrase that is
 	 * the same forwards and backwards. A permutation is a rea rrangement of
 	 * letters. The palindrome does not need to be limited to just dictionary words.
-	 * EXAMPLE 
+	 * EXAMPLE
 	 */
 //	Input: Tact Coa 
 //	Output: True (permutations: "taco cat". "atco cta".* etc.)
@@ -137,32 +137,38 @@ public class ArraysandStrings {
 
 	public boolean oneAway(String one, String two) {
 
-		if(one.length() - two.length() == 0 || Math.abs(one.length() - two.length()) == 1) {
-		 
-		 byte[] chars = new byte[26];
-		 int editAway = 0;
-			
-			for (int i =0; i< one.length(); i++) {
-				chars[one.charAt(i) - 'a']++;
+		int editAway = 0;
+		if (one.length() == two.length()) {
+			for (int i = 0; i < one.length(); i++) {
+				if (one.charAt(i) != two.charAt(i)) {
+					editAway++;
+				}
 			}
-			
-			for (int i =0; i< two.length(); i++) {
-				chars[two.charAt(i) - 'a']--;
+			if (editAway <= 1) {
+				return true;
 			}
-			
-			for (int i =0; i<chars.length;i++) {
-				if(chars[i] == 1 || chars[i] == -1) {
-				editAway++;
-				}	
+		}
+
+		if (Math.abs(one.length() - two.length()) == 1) {
+			int i = 0;
+			int j = 0;
+			while (i < one.length() && j < two.length()) {
+				if (one.charAt(i) != two.charAt(j)) {
+					editAway++;
+					i++;
+				} else {
+					i++;
+					j++;
+				}
 			}
-			
-			if(editAway <= 1) {
-			return true;
+
+			if (editAway <= 1) {
+				return true;
 			}
-		 }
+		}
 		return false;
 	}
-	
+
 	public static void main(String[] args) {
 
 		ArraysandStrings obj = new ArraysandStrings();
@@ -170,12 +176,12 @@ public class ArraysandStrings {
 //		1.1
 //		String str = "kushal";
 //		System.out.println(obj.isUniqueCharString(str));
-		
+
 //		1.2
 //		  String stringOne = "aab"; 
 //		  String stringTwo = "abb";
 //		  System.out.println(obj.checkPermutation(stringOne, stringTwo));
-		 
+
 //		1.3
 //		String str = "Mr john smith    ";
 //		System.out.println("The given string is: " + str);
@@ -183,14 +189,14 @@ public class ArraysandStrings {
 //		obj.URLify(arr, 13);
 //		String string = String.valueOf(arr);
 //		System.out.print("The urlified string is: " + string);
-		
+
 //		1.4
 //		String s = "Leevl";
 //		System.out.println(obj.palindromePermutation(s));
-		
+
 //		1.5
-		String stringOne = "pales"; 
-		String stringTwo = "bakes";
+		String stringOne = "aab";
+		String stringTwo = "baa";
 		System.out.println(obj.oneAway(stringOne, stringTwo));
 	}
 
