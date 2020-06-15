@@ -167,7 +167,32 @@ public class ArraysandStrings {
 		}
 		return false;
 	}
-	
+
+	/*
+	 * 1.6 String Compression: Implement a method to perform basic string
+	 * compression using the counts of repeated characters. For example, the string
+	 * aabcccccaaa would become a2b1c5a3. If the "compressed" string would not
+	 * become smaller than the original string, your method should return the
+	 * original string. You can assume the string has only uppercase and lowercase
+	 * letters (a - z).
+	 */
+
+	public String stringCompression(String str) {
+		StringBuilder compressed = new StringBuilder();
+		int countConsecutive = 0;
+		for (int i = 0; i < str.length(); i++) {
+			countConsecutive++;
+
+			if (i + 1 >= str.length() || str.charAt(i) != str.charAt(i + 1)) {
+				compressed.append(str.charAt(i));
+				compressed.append(countConsecutive);
+				countConsecutive = 0;
+			}
+		}
+
+		return compressed.length() < str.length() ? compressed.toString() : str;
+	}
+
 	public static void main(String[] args) {
 
 		ArraysandStrings obj = new ArraysandStrings();
@@ -175,12 +200,12 @@ public class ArraysandStrings {
 //		1.1
 //		String str = "kushal";
 //		System.out.println(obj.isUniqueCharString(str));
-		
+
 //		1.2
 //		  String stringOne = "aab"; 
 //		  String stringTwo = "abb";
 //		  System.out.println(obj.checkPermutation(stringOne, stringTwo));
-		 
+
 //		1.3
 //		String str = "Mr john smith    ";
 //		System.out.println("The given string is: " + str);
@@ -188,15 +213,19 @@ public class ArraysandStrings {
 //		obj.URLify(arr, 13);
 //		String string = String.valueOf(arr);
 //		System.out.print("The urlified string is: " + string);
-		
+
 //		1.4
 //		String s = "Leevl";
 //		System.out.println(obj.palindromePermutation(s));
-		
+
 //		1.5
-		String stringOne = "pales"; 
-		String stringTwo = "bakes";
-		System.out.println(obj.oneAway(stringOne, stringTwo));
+//		String stringOne = "pales";
+//		String stringTwo = "bakes";
+//		System.out.println(obj.oneAway(stringOne, stringTwo));
+		
+//		1.6
+		String longString = "abbbcccceedss";
+		System.out.println(obj.stringCompression(longString));
 	}
 
 }
