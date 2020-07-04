@@ -234,6 +234,51 @@ public class ArraysandStrings {
 		}
 	}
 
+	/*
+	 * Zero Matrix: Write an algorithm such that if an element in an MxN matrix is
+	 * 0, its entire row and column are set to O.
+	 */
+	public void setZeroes(int[][] matrix) {
+		int rowLength = matrix.length;
+		int colLength = matrix[0].length;
+
+		boolean[] row = new boolean[rowLength];
+		boolean[] col = new boolean[colLength];
+
+		System.out.println("Before setting . . .");
+		for (int i = 0; i < rowLength; i++) {
+			for (int j = 0; j < colLength; j++) {
+				System.out.print(matrix[i][j] + " ");
+			}
+			System.out.println(" ");
+		}
+
+		for (int i = 0; i < rowLength; i++) {
+			for (int j = 0; j < colLength; j++) {
+				if (matrix[i][j] == 0) {
+					row[i] = true;
+					col[j] = true;
+				}
+			}
+		}
+
+		for (int i = 0; i < rowLength; i++) {
+			for (int j = 0; j < colLength; j++) {
+				if (row[i] || col[j]) {
+					matrix[i][j] = 0;
+				}
+			}
+		}
+
+		System.out.println("After setting . . .");
+		for (int i = 0; i < rowLength; i++) {
+			for (int j = 0; j < colLength; j++) {
+				System.out.print(matrix[i][j] + " ");
+			}
+			System.out.println(" ");
+		}
+	}
+
 	public static void main(String[] args) {
 
 		ArraysandStrings obj = new ArraysandStrings();
@@ -270,8 +315,12 @@ public class ArraysandStrings {
 //		System.out.println(obj.stringCompression(longString));
 
 //		1.7
-		int[][] matrix = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
-		obj.rotateMatrix(matrix);
+//		int[][] matrix = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
+//		obj.rotateMatrix(matrix);
+
+//		1.8
+		int[][] arr = { { 1, 1, 1 }, { 1, 0, 1 }, { 1, 1, 1 } };
+		obj.setZeroes(arr);
 	}
 
 }
