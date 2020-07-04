@@ -85,7 +85,7 @@ public class ArraysandStrings {
 	 * is a permutation of a palindrome. A palindrome is a word or phrase that is
 	 * the same forwards and backwards. A permutation is a rea rrangement of
 	 * letters. The palindrome does not need to be limited to just dictionary words.
-	 * EXAMPLE 
+	 * EXAMPLE
 	 */
 //	Input: Tact Coa 
 //	Output: True (permutations: "taco cat". "atco cta".* etc.)
@@ -193,6 +193,47 @@ public class ArraysandStrings {
 		return compressed.length() < str.length() ? compressed.toString() : str;
 	}
 
+	/*
+	 * 1.7 Rotate Matrix: Given an image represented by an NxN matrix, where each
+	 * pixel in the image is 4 bytes, write a method to rotate the image by 90
+	 * degrees. (an you do this in place?
+	 */
+
+	public void rotateMatrix(int[][] matrix) {
+		int n = matrix.length;
+		int temp;
+
+		System.out.println("Before rotation . . .");
+		for (int i = 0; i < matrix.length; i++) {
+			for (int j = 0; j < matrix[i].length; j++) {
+				System.out.print(matrix[i][j] + " ");
+			}
+			System.out.println(" ");
+		}
+
+		for (int i = 0; i < matrix.length; i++) {
+			for (int j = 0; j < i; j++) {
+				temp = matrix[i][j];
+				matrix[i][j] = matrix[j][i];
+				matrix[j][i] = temp;
+			}
+		}
+		for (int i = 0; i < matrix.length; i++) {
+			for (int j = 0; j < (n / 2); j++) {
+				temp = matrix[i][j];
+				matrix[i][j] = matrix[i][n - 1 - j];
+				matrix[i][n - 1 - j] = temp;
+			}
+		}
+		System.out.println("After rotation . . .");
+		for (int i = 0; i < matrix.length; i++) {
+			for (int j = 0; j < matrix[i].length; j++) {
+				System.out.print(matrix[i][j] + " ");
+			}
+			System.out.println(" ");
+		}
+	}
+
 	public static void main(String[] args) {
 
 		ArraysandStrings obj = new ArraysandStrings();
@@ -203,6 +244,7 @@ public class ArraysandStrings {
 
 //		1.2
 //		  String stringOne = "aab"; 
+
 //		  String stringTwo = "abb";
 //		  System.out.println(obj.checkPermutation(stringOne, stringTwo));
 
@@ -222,10 +264,14 @@ public class ArraysandStrings {
 //		String stringOne = "pales";
 //		String stringTwo = "bakes";
 //		System.out.println(obj.oneAway(stringOne, stringTwo));
-		
+
 //		1.6
-		String longString = "abbbcccceedss";
-		System.out.println(obj.stringCompression(longString));
+//		String longString = "abbbcccceedss";
+//		System.out.println(obj.stringCompression(longString));
+
+//		1.7
+		int[][] matrix = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
+		obj.rotateMatrix(matrix);
 	}
 
 }
