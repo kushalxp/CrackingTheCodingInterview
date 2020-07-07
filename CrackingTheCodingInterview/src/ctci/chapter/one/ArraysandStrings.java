@@ -219,7 +219,7 @@ public class ArraysandStrings {
 				matrix[j][i] = temp;
 			}
 		}
-		
+
 //		Swap the first columns 
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < (n / 2); j++) {
@@ -282,6 +282,26 @@ public class ArraysandStrings {
 		}
 	}
 
+	/*
+	 * String Rotation: Assume you have a method isSubst ring which checks if one
+	 * word is a substring of another. Given two strings, 51 and 52, write code to
+	 * check if 52 is a rotation of 51 using only one call to is Substring (e.g.,
+	 * "waterbottle" is a rotation of"erbottlewat").
+	 */
+	public boolean isRotate(String s1, String s2) {
+		if (s1.length() != s2.length()) {
+			return false;
+		}
+
+		String concatinatedString = s2 + s2;
+		if (!concatinatedString.contains(s1)) {
+			return false;
+		}
+
+		return true;
+
+	}
+
 	public static void main(String[] args) {
 
 		ArraysandStrings obj = new ArraysandStrings();
@@ -322,8 +342,14 @@ public class ArraysandStrings {
 //		obj.rotateMatrix(matrix);
 
 //		1.8
-		int[][] arr = { { 1, 1, 1 }, { 1, 0, 1 }, { 1, 1, 1 } };
-		obj.setZeroes(arr);
+//		int[][] arr = { { 1, 1, 1 }, { 1, 0, 1 }, { 1, 1, 1 } };
+//		obj.setZeroes(arr);
+
+//		1.9
+		String a = "waterbottle";
+		String b = "erbottlewat";
+		System.out.println(obj.isRotate(a, b));
+
 	}
 
 }
