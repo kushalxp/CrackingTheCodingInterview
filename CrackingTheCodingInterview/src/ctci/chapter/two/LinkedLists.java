@@ -29,7 +29,6 @@ public class LinkedLists {
 	/*
 	 * 2.1 Remove Dups: Write code to remove duplicates from an unsorted linked
 	 */
-
 	public ListNode removeDuplicates(ListNode n) {
 		HashSet<Integer> set = new HashSet<>();
 		ListNode current = n;
@@ -44,6 +43,25 @@ public class LinkedLists {
 			current = current.next;
 		}
 		return n;
+	}
+
+	/*
+	 * Return Kth to Last: Implement an algorithm to find the kth to last element of
+	 * a singly linked list.
+	 */
+	public ListNode returnKthToLastElement(ListNode n, int k) {
+		int index = 0;
+
+		while (n != null) {
+
+			if (index == k) {
+				return n;
+			}
+			index++;
+			n = n.next;
+		}
+
+		return null;
 	}
 
 	public static void main(String[] args) {
@@ -65,8 +83,13 @@ public class LinkedLists {
 		sixx.next = null;
 
 //		2.1
+//		obj.printList(head);
+//		ListNode ans = obj.removeDuplicates(head);
+//		obj.printList(ans);
+
+//		2.2
 		obj.printList(head);
-		ListNode ans = obj.removeDuplicates(head);
+		ListNode ans = obj.returnKthToLastElement(head, 4);
 		obj.printList(ans);
 
 	}
