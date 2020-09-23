@@ -183,16 +183,68 @@ public class LinkedLists {
 
 	}
 
+	/*
+	 * 2.6 Palindrome: Implement a function to check if a linked list is a
+	 * palindrome.
+	 */
+
+	public Boolean palindrome(ListNode head) {
+		ListNode prev = null;
+		ListNode curr = head;
+		ListNode temp;
+		ListNode secondHeadHunter = head;
+		ListNode secondHead = null;
+		int length = 0;
+
+		while (head != null) {
+			length++;
+			head = head.next;
+		}
+
+		int index = length / 2;
+		int count = 0;
+		if (length % 2 != 0) {
+			index += 1;
+		}
+
+		while (secondHeadHunter != null) {
+			if (count == index) {
+				secondHead = secondHeadHunter;
+				break;
+			}
+			count++;
+			secondHeadHunter = secondHeadHunter.next;
+		}
+		index = length / 2;
+		while (index > 0 && curr != null) {
+			temp = curr.next;
+			curr.next = prev;
+			prev = curr;
+			curr = temp;
+			index--;
+		}
+		head = prev;
+
+		while (head != null && secondHead != null) {
+			if (head.val != secondHead.val) {
+				return false;
+			}
+			head = head.next;
+			secondHead = secondHead.next;
+		}
+		return true;
+	}
+
 	public static void main(String[] args) {
 
 		LinkedLists obj = new LinkedLists();
 
-		ListNode head = new ListNode(9);
-		ListNode seco = new ListNode(7);
-		ListNode thir = new ListNode(8);
-		ListNode four = new ListNode(9);
-		ListNode five = new ListNode(7);
-		ListNode sixx = new ListNode(8);
+		ListNode head = new ListNode(1);
+		ListNode seco = new ListNode(2);
+		ListNode thir = new ListNode(3);
+		ListNode four = new ListNode(4);
+		ListNode five = new ListNode(2);
+		ListNode sixx = new ListNode(1);
 
 		head.next = seco;
 		seco.next = thir;
@@ -222,17 +274,20 @@ public class LinkedLists {
 //		obj.printList(ans);
 
 //		2.5
-		obj.printList(four);
-		ListNode newList1 = new ListNode(6);
-		ListNode newList2 = new ListNode(8);
-		ListNode newList3 = new ListNode(5);
-		newList1.next = newList2;
-		newList2.next = newList3;
-		newList3.next = null;
-		obj.printList(newList1);
-		ListNode ans = obj.sumLists(four, newList1);
-		obj.printList(ans);
+//		obj.printList(four);
+//		ListNode newList1 = new ListNode(6);
+//		ListNode newList2 = new ListNode(8);
+//		ListNode newList3 = new ListNode(5);
+//		newList1.next = newList2;
+//		newList2.next = newList3;
+//		newList3.next = null;
+//		obj.printList(newList1);
+//		ListNode ans = obj.sumLists(four, newList1);
+//		obj.printList(ans);
 
+//		2.6
+		obj.printList(head);
+		System.out.println(obj.palindrome(head));
 	}
 
 }
