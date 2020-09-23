@@ -264,6 +264,35 @@ public class LinkedLists {
 
 	}
 
+	/*
+	 * 2.8 Loop Detection: Given a circular linked list, implement an algorithm that
+	 * returns the node at the beginning of the loop. DEFINITION Circular linked
+	 * list: A (corrupt) linked list in which a node's next pointer points to an
+	 * earlier node, so as to make a loop in the linked list. EXAMPLE Input: A -) B
+	 * -) C -) 0 -) E - ) C[thesameCasearlierl Output: C
+	 */
+
+	public ListNode loopDetection(ListNode l1) {
+		ListNode original = l1;
+		ListNode slow = l1;
+		ListNode fast = l1;
+
+		while (slow != null && fast != null && fast.next != null) {
+			slow = slow.next;
+			fast = fast.next.next;
+			if (slow == fast) {
+				while (original != slow) {
+					System.out.println("what");
+					original = original.next;
+					slow = slow.next;
+				}
+				return slow;
+			}
+		}
+		return null;
+
+	}
+
 	public static void main(String[] args) {
 
 		LinkedLists obj = new LinkedLists();
@@ -272,8 +301,8 @@ public class LinkedLists {
 		ListNode seco = new ListNode(2);
 		ListNode thir = new ListNode(3);
 		ListNode four = new ListNode(4);
-		ListNode five = new ListNode(2);
-		ListNode sixx = new ListNode(1);
+		ListNode five = new ListNode(5);
+		ListNode sixx = new ListNode(6);
 
 		head.next = seco;
 		seco.next = thir;
@@ -319,15 +348,20 @@ public class LinkedLists {
 //		System.out.println(obj.palindrome(head));
 
 //		2.7
-		obj.printList(head);
-		ListNode newList1 = new ListNode(6);
-		ListNode newList2 = new ListNode(8);
-		newList1.next = newList2;
-		newList2.next = four;
-		obj.printList(newList1);
-		ListNode ans = obj.intersection(head, newList1);
-		obj.printList(ans);
+//		obj.printList(head);
+//		ListNode newList1 = new ListNode(6);
+//		ListNode newList2 = new ListNode(8);
+//		newList1.next = newList2;
+//		newList2.next = four;
+//		obj.printList(newList1);
+//		ListNode ans = obj.intersection(head, newList1);
+//		obj.printList(ans);
 
+//		2.8
+		obj.printList(head);
+		sixx.next = thir;
+		ListNode ans = obj.loopDetection(head);
+		System.out.println("Loop started at " + ans.val);
 	}
 
 }
