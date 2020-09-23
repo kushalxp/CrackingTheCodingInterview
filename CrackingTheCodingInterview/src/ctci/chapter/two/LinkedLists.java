@@ -235,6 +235,35 @@ public class LinkedLists {
 		return true;
 	}
 
+	/*
+	 * 2.7 Intersection: Given two (singly) linked lists, determine if the two lists
+	 * intersect. Return the intersecting node. Note that the intersection is
+	 * defined based on reference, not value. That is, if the kth node of the first
+	 * linked list is the exact same node (by reference) as the jth node of the
+	 * second linked list, then they are intersecting.
+	 */
+	public ListNode intersection(ListNode l1, ListNode l2) {
+		ListNode A = l1;
+		ListNode B = l2;
+
+		while (A != B) {
+			if (A != null) {
+				A = A.next;
+			} else {
+				A = l2;
+			}
+
+			if (B != null) {
+				B = B.next;
+			} else {
+				B = l1;
+			}
+		}
+
+		return A;
+
+	}
+
 	public static void main(String[] args) {
 
 		LinkedLists obj = new LinkedLists();
@@ -286,8 +315,19 @@ public class LinkedLists {
 //		obj.printList(ans);
 
 //		2.6
+//		obj.printList(head);
+//		System.out.println(obj.palindrome(head));
+
+//		2.7
 		obj.printList(head);
-		System.out.println(obj.palindrome(head));
+		ListNode newList1 = new ListNode(6);
+		ListNode newList2 = new ListNode(8);
+		newList1.next = newList2;
+		newList2.next = four;
+		obj.printList(newList1);
+		ListNode ans = obj.intersection(head, newList1);
+		obj.printList(ans);
+
 	}
 
 }
