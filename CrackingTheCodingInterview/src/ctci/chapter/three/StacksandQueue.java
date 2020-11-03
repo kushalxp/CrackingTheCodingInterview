@@ -16,7 +16,7 @@ public class StacksandQueue {
 	int top = -1;
 
 	public void push(int x) {
-		if (s2.isEmpty() || s2.peek() > x) {
+		if (s2.isEmpty() || s2.peek() >= x) {
 			s2.push(x);
 		}
 		list.add(x);
@@ -33,7 +33,7 @@ public class StacksandQueue {
 	}
 
 	public int getMin() {
-		int y = -1;
+		int y = 0;
 		if (!s2.isEmpty()) {
 			y = s2.peek();
 		}
