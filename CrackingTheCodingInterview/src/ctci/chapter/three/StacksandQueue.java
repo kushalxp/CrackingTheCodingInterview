@@ -114,6 +114,42 @@ public class StacksandQueue {
 		}
 	}
 
+	public static class QueueViaStack {
+		Stack<Integer> s1;
+		Stack<Integer> s2;
+
+		public QueueViaStack() {
+			s1 = new Stack<Integer>();
+			s2 = new Stack<Integer>();
+		}
+
+		public void add(int x) {
+			s1.push(x);
+		}
+
+		public int remove() {
+			shiftStacks();
+			return s2.pop();
+		}
+
+		public int size() {
+			return s1.size() + s2.size();
+		}
+
+		public int peek() {
+			shiftStacks();
+			return s2.peek();
+		}
+
+		public void shiftStacks() {
+			if (s2.isEmpty()) {
+				while (!s1.isEmpty()) {
+					s2.push(s1.pop());
+				}
+			}
+		}
+	}
+
 	public static void main(String[] args) {
 
 		StacksandQueue obj = new StacksandQueue();
@@ -137,17 +173,28 @@ public class StacksandQueue {
 //		System.out.println("Min is " + obj.getMin());
 
 //		3.3 Stack of Plates
-		StacksandQueue.StackofPlates obj2 = new StacksandQueue.StackofPlates();
-		obj2.push(1);
-		obj2.push(2);
-		obj2.push(3);
-		obj2.push(4);
-		obj2.push(5);
-		obj2.push(6);
-		obj2.pop();
-		obj2.popAtIndex(1);
-		obj2.push(3);
+//		StacksandQueue.StackofPlates obj2 = new StacksandQueue.StackofPlates();
+//		obj2.push(1);
+//		obj2.push(2);
+//		obj2.push(3);
+//		obj2.push(4);
+//		obj2.push(5);
+//		obj2.push(6);
+//		obj2.pop();
+//		obj2.popAtIndex(1);
+//		obj2.push(3);
 
+//		3.4 Queue via Stacks
+		StacksandQueue.QueueViaStack obj2 = new StacksandQueue.QueueViaStack();
+		obj2.add(1);
+		obj2.add(2);
+		obj2.add(3);
+		obj2.add(4);
+		obj2.add(5);
+		obj2.peek();
+		obj2.remove();
+		obj2.remove();
+		obj2.add(6);
 	}
 
 }
