@@ -114,6 +114,11 @@ public class StacksandQueue {
 		}
 	}
 
+	/*
+	 * 3.4 Queue via Stacks: Implement a MyQueue class which impl ements a queue
+	 * using two stacks.
+	 */
+
 	public static class QueueViaStack {
 		Stack<Integer> s1;
 		Stack<Integer> s2;
