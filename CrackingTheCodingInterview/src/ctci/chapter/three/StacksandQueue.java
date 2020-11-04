@@ -1,6 +1,7 @@
 package ctci.chapter.three;
 
 import java.util.ArrayList;
+import java.util.EmptyStackException;
 import java.util.List;
 import java.util.Stack;
 
@@ -41,26 +42,112 @@ public class StacksandQueue {
 
 	}
 
+	/*
+	 * Stack of Plates: Imagine a (literal) stack of plates. If the stack gets too
+	 * high, it might topple. Therefore, in real life, we would likely start a new
+	 * stack when the previous stack exceeds some threshold. Implement a data
+	 * structure SetOfStacks that mimics this. SetOfStacks should be composed of
+	 * several stacks and should create a new stack once the previous one exceeds
+	 * capacity. SetOfStacks. push () and SetOfStacks. pop () should behave
+	 * identically to a single stack (that is, pop ( ) should return the same values
+	 * as it would if there were just a single stack). FOLLOW UP Implement a
+	 * function popAt (int index) which performs a pop operation on a specific
+	 * sub-stack.
+	 */
+
+	public static class StackofPlates<T> {
+		List<Stack<T>> listOfStacks;
+		int stackCapacity = 2;
+
+		public StackofPlates() {
+			listOfStacks = new ArrayList<Stack<T>>();
+		}
+
+		public void push(T x) {
+			if (listOfStacks.size() == 0) {
+				createNewStackAndPush(x);
+			} else {
+				Stack<T> lastStack = getLastStack();
+				if (lastStack != null) {
+					if (lastStack.size() >= stackCapacity) {
+						createNewStackAndPush(x);
+					} else {
+						lastStack.push(x);
+					}
+				}
+			}
+		}
+
+		public T pop() {
+			Stack<T> lastStack = getLastStack();
+
+			if (lastStack == null) {
+				throw new EmptyStackException();
+			}
+			T itemToPop = lastStack.pop();
+			if (lastStack.size() == 0) {
+				listOfStacks.remove(listOfStacks.size() - 1);
+			}
+
+			return itemToPop;
+		}
+
+		public T popAtIndex(int index) {
+			if (index >= listOfStacks.size()) {
+				return null;
+			}
+
+			return listOfStacks.get(index).pop();
+		}
+
+		private Stack<T> getLastStack() {
+			if (!listOfStacks.isEmpty()) {
+				return listOfStacks.get(listOfStacks.size() - 1);
+			}
+			return null;
+		}
+
+		private void createNewStackAndPush(T x) {
+			Stack<T> stack = new Stack<>();
+			stack.push(x);
+			listOfStacks.add(stack);
+		}
+	}
+
 	public static void main(String[] args) {
 
 		StacksandQueue obj = new StacksandQueue();
-		obj.push(4);
-		System.out.println("Pushing 4");
-		obj.push(5);
-		System.out.println("Pushing 5");
-		obj.push(6);
-		System.out.println("Pushing 6");
-		System.out.println("Min is " + obj.getMin());
-		obj.push(3);
-		System.out.println("Pushing 3");
-		obj.push(10);
-		System.out.println("Pushing 10");
-		System.out.println(obj.pop());
-		System.out.println(obj.pop());
-		System.out.println("Min is " + obj.getMin());
-		obj.push(1);
-		System.out.println("Pushing 1");
-		System.out.println("Min is " + obj.getMin());
+//		3.2 Min Stack
+//		obj.push(4);
+//		System.out.println("Pushing 4");
+//		obj.push(5);
+//		System.out.println("Pushing 5");
+//		obj.push(6);
+//		System.out.println("Pushing 6");
+//		System.out.println("Min is " + obj.getMin());
+//		obj.push(3);
+//		System.out.println("Pushing 3");
+//		obj.push(10);
+//		System.out.println("Pushing 10");
+//		System.out.println(obj.pop());
+//		System.out.println(obj.pop());
+//		System.out.println("Min is " + obj.getMin());
+//		obj.push(1);
+//		System.out.println("Pushing 1");
+//		System.out.println("Min is " + obj.getMin());
+
+//		3.3 Stack of Plates
+		StacksandQueue.StackofPlates obj2 = new StacksandQueue.StackofPlates();
+		obj2.push(1);
+		obj2.push(2);
+		obj2.push(3);
+		obj2.push(4);
+		obj2.push(5);
+		obj2.push(6);
+		obj2.pop();
+		obj2.popAtIndex(1);
+		obj2.push(3);
+
 	}
 
 }
