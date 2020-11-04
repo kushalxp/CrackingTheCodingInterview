@@ -2,6 +2,7 @@ package ctci.chapter.three;
 
 import java.util.ArrayList;
 import java.util.EmptyStackException;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
@@ -176,6 +177,61 @@ public class StacksandQueue {
 			s1.push(s2.pop());
 		}
 	}
+	/*
+	 * 3.6 Animal Shelter: An animal shelter, which holds only dogs and cats,
+	 * operates on a strictly"first in, first
+	 * out" basis. People must adopt either the "oldest" (based on arrival time) of
+	 * all animals at the shelter, or they can select whether they would prefer a
+	 * dog or a cat (and will receive the oldest animal of that type). They cannot
+	 * select which specific animal they would like. Create the data structures to
+	 * maintain this system and implement operations such as enqueue, dequeueAny,
+	 * dequeueDog, and dequeueCat. You may use the built-in Linked List data
+	 * structure.
+	 */
+
+	public static class AnimalShelter {
+		List<String> list;
+
+		public AnimalShelter() {
+			list = new LinkedList<String>();
+		}
+
+		public void enqueue(String s) {
+			list.add(s);
+		}
+
+		public String dequeueAny() {
+			String animal;
+			if (!list.isEmpty()) {
+				animal = list.remove(0);
+			} else {
+				return "No animal available";
+			}
+			return animal;
+		}
+
+		public String dequeueDog() {
+			if (!list.isEmpty()) {
+				for (int i = 0; i < list.size(); i++) {
+					if (list.get(i).startsWith("Dog")) {
+						return list.remove(i);
+					}
+				}
+			}
+			return "No Dog available";
+		}
+
+		public String dequeueCat() {
+			if (!list.isEmpty()) {
+				for (int i = 0; i < list.size(); i++) {
+					if (list.get(i).startsWith("Cat")) {
+						return list.remove(i);
+					}
+				}
+			}
+			return "No Cat available";
+		}
+	}
 
 	public static void main(String[] args) {
 
@@ -224,16 +280,28 @@ public class StacksandQueue {
 //		obj2.add(6);
 
 //		3.5
-		Stack<Integer> s1 = new Stack<Integer>();
-		s1.push(3);
-		s1.push(2);
-		s1.push(4);
-		s1.push(1);
-		s1.push(0);
-		s1.push(9);
-		System.out.println("Unsorted stack " + s1);
-		obj.sortStack(s1);
-		System.out.println("Sorted stack " + s1);
+//		Stack<Integer> s1 = new Stack<Integer>();
+//		s1.push(3);
+//		s1.push(2);
+//		s1.push(4);
+//		s1.push(1);
+//		s1.push(0);
+//		s1.push(9);
+//		System.out.println("Unsorted stack " + s1);
+//		obj.sortStack(s1);
+//		System.out.println("Sorted stack " + s1);
+
+//		3.6
+		StacksandQueue.AnimalShelter obj2 = new StacksandQueue.AnimalShelter();
+		obj2.enqueue("Dog1");
+		obj2.enqueue("Dog2");
+		obj2.enqueue("Dog3");
+		obj2.enqueue("Cat1");
+		obj2.enqueue("Cat2");
+		obj2.enqueue("Dog4");
+		obj2.dequeueCat();
+		obj2.dequeueDog();
+		obj2.dequeueAny();
 	}
 
 }
