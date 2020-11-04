@@ -155,6 +155,28 @@ public class StacksandQueue {
 		}
 	}
 
+	/*
+	 * 3.5 Sort Stack: Write a program to sort a stack such that the smallest items
+	 * are on the top. You can use an additional temporary stack, but you may not
+	 * copy the elements into any other data structure (such as an array). The stack
+	 * supports the following operations: push, pop, peek, and isEmpty.
+	 */
+
+	public void sortStack(Stack<Integer> s1) {
+		Stack<Integer> s2 = new Stack<Integer>();
+		while (!s1.isEmpty()) {
+			int temp = s1.pop();
+			while (!s2.isEmpty() && s2.peek() > temp) {
+				s1.push(s2.pop());
+			}
+			s2.push(temp);
+		}
+
+		while (!s2.isEmpty()) {
+			s1.push(s2.pop());
+		}
+	}
+
 	public static void main(String[] args) {
 
 		StacksandQueue obj = new StacksandQueue();
@@ -190,16 +212,28 @@ public class StacksandQueue {
 //		obj2.push(3);
 
 //		3.4 Queue via Stacks
-		StacksandQueue.QueueViaStack obj2 = new StacksandQueue.QueueViaStack();
-		obj2.add(1);
-		obj2.add(2);
-		obj2.add(3);
-		obj2.add(4);
-		obj2.add(5);
-		obj2.peek();
-		obj2.remove();
-		obj2.remove();
-		obj2.add(6);
+//		StacksandQueue.QueueViaStack obj2 = new StacksandQueue.QueueViaStack();
+//		obj2.add(1);
+//		obj2.add(2);
+//		obj2.add(3);
+//		obj2.add(4);
+//		obj2.add(5);
+//		obj2.peek();
+//		obj2.remove();
+//		obj2.remove();
+//		obj2.add(6);
+
+//		3.5
+		Stack<Integer> s1 = new Stack<Integer>();
+		s1.push(3);
+		s1.push(2);
+		s1.push(4);
+		s1.push(1);
+		s1.push(0);
+		s1.push(9);
+		System.out.println("Unsorted stack " + s1);
+		obj.sortStack(s1);
+		System.out.println("Sorted stack " + s1);
 	}
 
 }
